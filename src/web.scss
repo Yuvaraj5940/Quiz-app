@@ -1,0 +1,57 @@
+.body{
+    @apply flex flex-col items-center h-screen bg-purple-300;
+    &__header{
+    @apply flex flex-row w-full py-4 px-6 ;
+    }
+     &__list {
+             @apply flex flex-col w-full flex-1 overflow-y-auto py-10  items-center bg-purple-300 ;
+             &__qns{
+                @apply items-center w-4/6 ;
+             }
+             &__optons{
+                @apply py-8 items-center gap-4  px-8;
+               
+             }
+             
+         }
+    
+    &__filter {
+            @apply flex w-full;
+            &__btns{
+                @apply flex gap-1  bg-gray-200 px-10 items-center w-full h-12 ;
+            }
+        }
+    
+   
+}
+.body__header{
+  
+    &__icon{
+        @apply flex flex-row items-center border rounded-lg px-1;
+    }
+    &__title{
+        @apply flex-1  text-center text-2xl font-bold ;
+    }
+    &__close{
+        @apply inline-flex items-center justify-center px-1 border rounded-full  border-transparent border-spacing-x-9  ;
+    }
+}
+.body__list{
+    @apply bg-purple-300 ;
+}
+.resp{
+    @apply flex flex-col items-center h-screen w-screen  py-16 px-12 bg-purple-300;
+  
+    &__close{
+        @apply flex justify-end w-full;
+        &__b{
+            @apply py-2 px-2 border rounded-full bg-slate-500;
+        }
+    }
+}
+.ss{
+    @apply flex flex-col gap-2 w-2/5 min-w-min  items-center justify-center;
+    &__score{
+
+    }
+}
