@@ -1,11 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, {
+  createContext, useContext, useEffect, useState,
+} from 'react';
 import clsx from 'clsx';
-import './web.scss';
 import './style.scss';
+import './web.scss';
 import { Link } from 'react-router-dom';
 import ProgressBar from './progressbar';
 import { GivenData } from './qnsData';
 import QuizResult from './QuizResult';
+import { Contextmain } from './context/mainContext';
 
 // import { Evaluate } from './validations';
 
@@ -15,6 +18,13 @@ function Web() {
   const [optionsatus, setoptionsatus] = useState(0);
   const [selectedQno, setselectedQno] = useState(0);
   const [showresult, setShowresult] = useState(false);
+  // const  = useContext(Contextmain);
+  const { jres, sr, er } = useContext(Contextmain);
+  // console.log('err', er);
+  useEffect(() => {
+    jres();
+  }, []);
+  // console.log('sr', sr);
   // console.log('selectedQno', selectedQno);
   // console.log('score', score);
   const UpdateScore = () => {
@@ -33,6 +43,7 @@ function Web() {
       setShowresult(true);
     }
   };
+  // console.log('sr', sr[selectedQno]);
 
   return (
     <div className="body">
@@ -41,6 +52,14 @@ function Web() {
       ) :
         (
           <>
+            {/* {
+            sr.map((c) => {
+              if (c.id === selectedQno + 1) {
+                console.log(c);
+              }
+              return null;
+            })
+          } */}
             <div className="body__header ">
               <div className="body__header__icon">
                 <div className="flex-1">
@@ -59,7 +78,7 @@ function Web() {
                 <div />
               </div>
               <h1 className="body__header__title">Fantastic Quiz</h1>
-              <Link to="/" >
+              <Link to="/">
                 <button
                   type="button"
                   className="body__header__close bg-purple-300"
@@ -71,7 +90,64 @@ function Web() {
               </Link>
               <div />
             </div>
-            <div className="body__list">
+            {
+            sr.map((c) => {
+              if (c.id === selectedQno + 1) {
+                return (
+                  <div className="body__list">
+                    <div className="body__list__qns">
+                      <h2 className="text-center text-3xl font-bold">
+                        {' '}
+                        <span>
+                          {selectedQno + 1}
+                          .
+                        </span>
+                        {'  '}
+
+                        {
+                      c.quation
+                       }
+                      </h2>
+                    </div>
+                    <div className="body__list__optons">
+                      <div className="__opt flex flex-col gap-4 ">
+                        {
+                    c.options.map((v, i) => (
+
+                      <button
+                        type="button"
+                        className={`obtn rounded-md ${optionsatus === Number(i + 1) ? 'btn--active bg-green-600' : null
+                        }`}
+                        key={i}
+                        onClick={() => {
+                          setoptionsatus(i + 1);
+                          setbtnstatus(true);
+                        }}
+                      >
+
+                        <h2 className="border rounded-full text-xl font-bold h-9 w-9  bg-gray-400">
+                          {optionsatus - 1 === (i) ?
+                            <svg className="h-9 w-9 fill-green-900 stroke-green-400 stroke-3 bg-gray-300 border rounded-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z" /></svg> : i + 1 }
+                        </h2>
+                        <p className="opt-1 text-lg font-bold px-3">
+                          {v}
+
+                        </p>
+
+                      </button>
+
+                    ))
+                  }
+                      </div>
+                    </div>
+                    <div />
+                  </div>
+                );
+              }
+              return null;
+            })
+          }
+            {/* <div className="body__list">
               <div className="body__list__qns">
                 <h2 className="text-center text-3xl font-bold">
                   {' '}
@@ -80,10 +156,15 @@ function Web() {
                     .
                   </span>
                   {'  '}
-                  {
 
-                    GivenData[selectedQno].quation
-                  }
+                  {
+            sr.map((c) => {
+              if (c.id === selectedQno + 1) {
+                return c.quation;
+              }
+              return null;
+            })
+          }
 
                 </h2>
               </div>
@@ -121,7 +202,8 @@ function Web() {
                 </div>
               </div>
               <div />
-            </div>
+            </div> */}
+
             <div className="body__filter">
               <div className="body__filter__btns">
                 <ProgressBar bgcolor="green" progress={`${(selectedQno) * (100 / GivenData.length)}`} />

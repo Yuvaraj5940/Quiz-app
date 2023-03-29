@@ -12,6 +12,8 @@ const root = createRoot(container);
 root.render(
   // <QuizResult />,
   // <FirstPage />,
-  <Main />,
+  <MainContext>
+    <Main />
+  </MainContext>,
 
 );

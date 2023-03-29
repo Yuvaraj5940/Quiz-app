@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
+import MainContext from './context/mainContext';
 import FirstPage from './FirstPage';
 import QuizResult from './QuizResult';
 import Web from './web';
